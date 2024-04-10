@@ -1,17 +1,8 @@
 package com.interview.planets.presentation.home
 
-import android.widget.Toast
-import androidx.compose.foundation.layout.Arrangement
-import androidx.compose.foundation.layout.Column
-import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.lazy.grid.GridCells
 import androidx.compose.foundation.lazy.grid.LazyVerticalGrid
-import androidx.compose.material3.CircularProgressIndicator
-import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
-import androidx.compose.ui.Alignment
-import androidx.compose.ui.Modifier
-import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.paging.LoadState
@@ -19,6 +10,8 @@ import androidx.paging.compose.LazyPagingItems
 import androidx.paging.compose.collectAsLazyPagingItems
 import androidx.paging.compose.itemContentType
 import androidx.paging.compose.itemKey
+import com.interview.components.FullScreenLoader
+import com.interview.components.ListItemLoader
 import com.interview.planets.data.models.Planet
 import com.interview.planets.presentation.MainViewModel
 import com.interview.planets.presentation.home.components.PlanetItem
@@ -28,16 +21,14 @@ import com.interview.planets.presentation.home.components.PlanetItem
 fun PlanetsScreen(
     uiState: MainViewModel.BaseUIState? = null
 ) {
-    val context = LocalContext.current
     uiState?.planets?.collectAsLazyPagingItems()?.let { lazyPagingItems ->
-        when (lazyPagingItems.loadState.refresh) { //FIRST LOAD
+        when (lazyPagingItems.loadState.refresh) {
             is LoadState.Error -> {
-                Toast.makeText(context, "Error", Toast.LENGTH_LONG).show()
                 LoadList(lazyPagingItems = lazyPagingItems)
             }
 
-            is LoadState.Loading -> { // Loading UI
-                
+            is LoadState.Loading -> {
+                FullScreenLoader()
             }
 
             else -> {
@@ -59,22 +50,13 @@ fun LoadList(lazyPagingItems: LazyPagingItems<Planet>) {
 
         }
 
-        when (lazyPagingItems.loadState.append) { // Pagination
+        when (lazyPagingItems.loadState.append) {
             is LoadState.Error -> {
-                //Toast.makeText(context, "End Of Page", Toast.LENGTH_LONG).show()
             }
 
-            is LoadState.Loading -> { // Pagination Loading UI
+            is LoadState.Loading -> {
                 item {
-                    Column(
-                        modifier = Modifier
-                            .fillMaxWidth(),
-                        horizontalAlignment = Alignment.CenterHorizontally,
-                        verticalArrangement = Arrangement.Center,
-                    ) {
-                        Text(text = "Pagination Loading")
-                        CircularProgressIndicator(color = Color.Black)
-                    }
+                    ListItemLoader()
                 }
             }
 

@@ -93,7 +93,7 @@ dependencies {
     implementation("androidx.paging:paging-compose:3.2.1")
 
     //component library
-    implementation(":components")
+    implementation(project(":components"))
     //test
     testImplementation("junit:junit:4.13.2")
     androidTestImplementation("androidx.test.ext:junit:1.1.5")
