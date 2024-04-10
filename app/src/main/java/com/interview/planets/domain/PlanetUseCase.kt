@@ -24,9 +24,9 @@ class PlanetUseCase @Inject constructor(
             config = PagingConfig(
                 pageSize = PAGE_SIZE,
                 prefetchDistance = 10,
-                initialLoadSize = 1,
+                initialLoadSize = 10,
             ),
-            initialKey = 1,
+            initialKey = null,
             pagingSourceFactory = {
                 planetsDao.getAllPlanets()
             },

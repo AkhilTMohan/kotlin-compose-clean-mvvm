@@ -15,6 +15,7 @@ fun BaseUI(
     updateBaseUI: (MainViewModel.BaseUIState) -> Unit,
     getPlanets: () -> Unit
 ) {
+
     NavHost(navController = rememberNavController(), startDestination = HOME) {
         composable(HOME) {
             PlanetsScreen(uiState)

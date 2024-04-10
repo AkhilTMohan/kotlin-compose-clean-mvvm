@@ -75,6 +75,7 @@ dependencies {
     //hilt
     implementation("com.google.dagger:hilt-android:2.49")
     ksp("com.google.dagger:hilt-android-compiler:2.48.1")
+    implementation("androidx.hilt:hilt-navigation-compose:1.2.0")
 
     //room
     implementation("androidx.room:room-runtime:2.6.1")
@@ -90,7 +91,7 @@ dependencies {
 
     //paging
     implementation("androidx.paging:paging-runtime-ktx:3.2.1")
-    implementation("androidx.paging:paging-compose:3.2.1")
+    implementation("androidx.paging:paging-compose:3.3.0-beta01")
 
     //component library
     implementation(project(":components"))

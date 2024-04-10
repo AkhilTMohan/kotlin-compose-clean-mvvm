@@ -1,7 +1,9 @@
 package com.interview.planets.presentation
 
 import androidx.lifecycle.ViewModel
+import androidx.lifecycle.viewModelScope
 import androidx.paging.PagingData
+import androidx.paging.cachedIn
 import com.interview.planets.data.models.Planet
 import com.interview.planets.domain.PlanetUseCase
 import dagger.hilt.android.lifecycle.HiltViewModel
@@ -29,7 +31,7 @@ class MainViewModel @Inject constructor(
     }
 
     fun getPlanets() {
-        val pageFlow = useCase.getPlanets()
+        val pageFlow = useCase.getPlanets().cachedIn(viewModelScope)
         _uiState.update {
             it.copy(
                 planets = pageFlow
