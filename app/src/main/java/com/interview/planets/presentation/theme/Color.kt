@@ -1,4 +1,4 @@
-package com.interview.planets.ui.theme
+package com.interview.planets.presentation.theme
 
 import androidx.compose.ui.graphics.Color
 
