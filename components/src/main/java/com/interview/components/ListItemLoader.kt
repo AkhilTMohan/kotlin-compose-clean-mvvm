@@ -18,7 +18,7 @@ fun ListItemLoader() {
         horizontalAlignment = Alignment.CenterHorizontally,
         verticalArrangement = Arrangement.Center,
     ) {
-        Text(text = "Loading Planets")
+        Text(text = "Loading Planets..")
         CircularProgressIndicator(color = Color.Black)
     }
 }

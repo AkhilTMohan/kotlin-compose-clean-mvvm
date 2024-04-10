@@ -6,7 +6,6 @@ import androidx.activity.compose.setContent
 import androidx.activity.viewModels
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
-import androidx.paging.compose.collectAsLazyPagingItems
 import com.interview.planets.presentation.theme.PlanetsTheme
 import dagger.hilt.android.AndroidEntryPoint
 
@@ -19,10 +18,12 @@ class MainActivity : ComponentActivity() {
             val uiState by mainViewModel.uiState.collectAsState()
             PlanetsTheme {
                 BaseUI(uiState,
-                    updateBaseUI = {
+                    updateBaseUIState = {
                         mainViewModel.updateBaseUIState(it)
-                    }, getPlanets = {
-                        mainViewModel.getPlanets()
+                    },
+                    fetchPlanetDataFromServer = {
+                        mainViewModel.fetchPlanetDataFromServer(it)
+
                     }
                 )
             }

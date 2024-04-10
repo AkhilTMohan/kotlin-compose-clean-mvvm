@@ -2,10 +2,10 @@ package com.interview.planets.core.di
 
 import android.content.Context
 import androidx.room.Room
-import com.google.gson.Gson
 import com.interview.planets.BuildConfig
 import com.interview.planets.core.database.PlanetDatabase
 import com.interview.planets.core.database.PlanetsDao
+import com.interview.planets.data.PlanetRepository
 import com.interview.planets.data.network.PlanetAPIInterface
 import com.interview.planets.domain.PlanetUseCase
 import dagger.Module
@@ -48,14 +48,21 @@ object PlanetsModule {
 
     @Singleton
     @Provides
+    fun providePlanetRepository(planetsDao: PlanetsDao, planetAPIInterface: PlanetAPIInterface) =
+        PlanetRepository(planetsDao = planetsDao, planetAPIInterface = planetAPIInterface)
+
+    @Singleton
+    @Provides
     fun providePlanetUseCase(
         planetsDao: PlanetsDao,
         planetDatabase: PlanetDatabase,
-        planetAPIInterface: PlanetAPIInterface
+        planetAPIInterface: PlanetAPIInterface,
+        planetRepository: PlanetRepository
     ) = PlanetUseCase(
         planetAPIInterface = planetAPIInterface,
         planetDatabase = planetDatabase,
-        planetsDao = planetsDao
+        planetsDao = planetsDao,
+        planetRepository = planetRepository
     )
 
     @Singleton

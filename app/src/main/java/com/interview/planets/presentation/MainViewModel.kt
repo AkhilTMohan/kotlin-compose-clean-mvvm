@@ -10,9 +10,8 @@ import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
-import kotlinx.coroutines.flow.collectLatest
-import kotlinx.coroutines.flow.map
 import kotlinx.coroutines.flow.update
+import kotlinx.coroutines.launch
 import javax.inject.Inject
 
 @HiltViewModel
@@ -39,9 +38,31 @@ class MainViewModel @Inject constructor(
         }
     }
 
+    fun fetchPlanetDataFromServer(planet: Planet?) {
+        viewModelScope.launch {
+            val planetResponse = useCase.fetchPlanetDataFromServer(planet)
+            if (planetResponse != null) {
+                updateBaseUIState(
+                    _uiState.value.copy(
+                        planetData = planetResponse,
+                    )
+                )
+            } else {
+                updateBaseUIState(
+                    _uiState.value.copy(
+                        planetData = planet,
+                        isError = "Error",
+                    )
+                )
+            }
+        }
+    }
+
     data class BaseUIState(
         var isLoading: Boolean = false,
-        var isError: Boolean = false,
-        val planets: Flow<PagingData<Planet>>? = null
+        var isError: String? = null,
+        var planetData: Planet? = null,
+        val planets: Flow<PagingData<Planet>>? = null,
+        var data: Any? = null
     )
 }

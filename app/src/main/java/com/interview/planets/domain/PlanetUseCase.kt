@@ -7,6 +7,7 @@ import androidx.paging.PagingData
 import com.interview.planets.core.database.PlanetDatabase
 import com.interview.planets.core.database.PlanetsDao
 import com.interview.planets.core.helpers.PlanetConstants.PAGE_SIZE
+import com.interview.planets.data.PlanetRepository
 import com.interview.planets.data.models.Planet
 import com.interview.planets.data.network.PlanetAPIInterface
 import com.interview.planets.data.paging.PlanetRemoteMediator
@@ -16,7 +17,8 @@ import javax.inject.Inject
 class PlanetUseCase @Inject constructor(
     private val planetsDao: PlanetsDao,
     private val planetDatabase: PlanetDatabase,
-    private val planetAPIInterface: PlanetAPIInterface
+    private val planetAPIInterface: PlanetAPIInterface,
+    private val planetRepository: PlanetRepository
 ) {
     @OptIn(ExperimentalPagingApi::class)
     fun getPlanets(): Flow<PagingData<Planet>> =
@@ -35,4 +37,7 @@ class PlanetUseCase @Inject constructor(
                 planetAPIInterface = planetAPIInterface
             )
         ).flow
+
+    suspend fun fetchPlanetDataFromServer(planet: Planet?) =
+        planetRepository.getPlanetDetailsFromServer(planet)
 }

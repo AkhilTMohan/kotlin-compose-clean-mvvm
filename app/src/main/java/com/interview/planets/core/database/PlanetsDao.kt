@@ -7,6 +7,7 @@ import androidx.room.Delete
 import androidx.room.Insert
 import androidx.room.OnConflictStrategy
 import androidx.room.Query
+import androidx.room.Update
 import com.interview.planets.data.models.PageDetails
 import com.interview.planets.data.models.Planet
 
@@ -27,5 +28,7 @@ interface PlanetsDao {
 
     @Query("SELECT * FROM planets")
     fun getAllPlanets(): PagingSource<Int, Planet>
+    @Update
+    fun updatePlanets(planet: Planet)
 
 }

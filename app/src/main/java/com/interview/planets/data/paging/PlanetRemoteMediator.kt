@@ -48,7 +48,7 @@ class PlanetRemoteMediator(
         try {
             val apiResponse = planetAPIInterface.getPlanets(page = page)
 
-            val planets: List<Planet> = apiResponse.planets?.map {
+            val planets: List<Planet> = apiResponse?.planets?.map {
                 it?.page = page
                 return@map it
             } as List<Planet>
