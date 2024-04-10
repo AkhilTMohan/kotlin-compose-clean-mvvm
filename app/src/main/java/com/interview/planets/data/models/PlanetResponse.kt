@@ -1,6 +1,7 @@
 package com.interview.planets.data.models
 
 
+import androidx.room.Entity
 import com.google.gson.annotations.SerializedName
 
 data class PlanetResponse(
@@ -9,7 +10,7 @@ data class PlanetResponse(
     @SerializedName("next")
     var next: String?,
     @SerializedName("previous")
-    var previous: Any?,
+    var previous: String?,
     @SerializedName("results")
-    var results: List<Result?>?
+    var planets: List<Planet?>?
 )

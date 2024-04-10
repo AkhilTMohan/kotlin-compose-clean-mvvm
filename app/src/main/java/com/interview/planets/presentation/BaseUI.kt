@@ -7,24 +7,17 @@ import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
 import com.interview.planets.core.helpers.PlanetConstants.HOME
-import com.interview.planets.presentation.screens.PlanetsScreen
-import kotlinx.coroutines.flow.StateFlow
+import com.interview.planets.presentation.home.PlanetsScreen
 
 @Composable
 fun BaseUI(
-    uiState: StateFlow<MainViewModel.BaseUIState>, updateBaseUI: (MainViewModel.BaseUIState) -> Unit
+    uiState: MainViewModel.BaseUIState,
+    updateBaseUI: (MainViewModel.BaseUIState) -> Unit,
+    getPlanets: () -> Unit
 ) {
-    val navController = rememberNavController()
-
-    @Composable
-    fun PlanetNavHost(
-        navController: NavHostController,
-        modifier: Modifier = Modifier,
-    ) {
-        NavHost(navController = navController, startDestination = HOME) {
-            composable(HOME) {
-                PlanetsScreen()
-            }
+    NavHost(navController = rememberNavController(), startDestination = HOME) {
+        composable(HOME) {
+            PlanetsScreen(uiState)
         }
     }
 }

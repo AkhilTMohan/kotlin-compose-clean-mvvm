@@ -5,7 +5,9 @@ import androidx.room.Room
 import com.google.gson.Gson
 import com.interview.planets.BuildConfig
 import com.interview.planets.core.database.PlanetDatabase
-import com.interview.planets.data.network.PlanetService
+import com.interview.planets.core.database.PlanetsDao
+import com.interview.planets.data.network.PlanetAPIInterface
+import com.interview.planets.domain.PlanetUseCase
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
@@ -34,10 +36,6 @@ object PlanetsModule {
 
     @Singleton
     @Provides
-    fun provideGson() = Gson()
-
-    @Singleton
-    @Provides
     fun provideLoggingInterceptor(): HttpLoggingInterceptor = HttpLoggingInterceptor().apply {
         level = if (BuildConfig.DEBUG) HttpLoggingInterceptor.Level.BODY
         else HttpLoggingInterceptor.Level.NONE
@@ -50,10 +48,22 @@ object PlanetsModule {
 
     @Singleton
     @Provides
-    fun providePlanetService(okHttpClient: OkHttpClient): PlanetService = Retrofit.Builder()
+    fun providePlanetUseCase(
+        planetsDao: PlanetsDao,
+        planetDatabase: PlanetDatabase,
+        planetAPIInterface: PlanetAPIInterface
+    ) = PlanetUseCase(
+        planetAPIInterface = planetAPIInterface,
+        planetDatabase = planetDatabase,
+        planetsDao = planetsDao
+    )
+
+    @Singleton
+    @Provides
+    fun providePlanetService(okHttpClient: OkHttpClient): PlanetAPIInterface = Retrofit.Builder()
         .baseUrl("https://swapi.dev/")
         .addConverterFactory(GsonConverterFactory.create())
         .client(okHttpClient)
         .build()
-        .create(PlanetService::class.java)
+        .create(PlanetAPIInterface::class.java)
 }

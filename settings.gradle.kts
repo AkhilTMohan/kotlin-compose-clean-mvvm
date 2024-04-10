@@ -15,3 +15,4 @@ dependencyResolutionManagement {
 
 rootProject.name = "Planets"
 include(":app")
+include(":components")

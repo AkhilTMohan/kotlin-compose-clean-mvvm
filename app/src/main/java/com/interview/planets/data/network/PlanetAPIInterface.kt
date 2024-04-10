@@ -4,9 +4,9 @@ import com.interview.planets.data.models.PlanetResponse
 import retrofit2.http.GET
 import retrofit2.http.Query
 
-interface PlanetService {
+interface PlanetAPIInterface {
     @GET("api/planets/")
-    fun getPlanets(
+    suspend fun getPlanets(
         @Query("page") page: Int
-    ):PlanetResponse
+    ): PlanetResponse
 }

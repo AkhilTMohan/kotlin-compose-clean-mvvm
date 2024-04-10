@@ -2,14 +2,14 @@ package com.interview.planets.data.models
 
 
 import androidx.room.Entity
-import androidx.room.Index
 import androidx.room.PrimaryKey
 import com.google.gson.annotations.SerializedName
 
 @Entity("planets")
-data class Result(
+data class Planet(
     @PrimaryKey(autoGenerate = true)
     val index: Int,
+    var page: Int?,
     @SerializedName("climate")
     var climate: String?,
     @SerializedName("created")
