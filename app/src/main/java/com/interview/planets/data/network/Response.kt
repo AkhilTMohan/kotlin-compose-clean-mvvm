@@ -3,18 +3,19 @@ package com.interview.planets.data.network
 import com.interview.planets.data.models.Planet
 
 sealed class Response<out T> {
-    enum class ERROR_TYPE {
+    enum class ErrorTypes {
         NO_NETWORK,
         ERROR
     }
 
     data class Success<out T>(val data: Planet?) : Response<T>()
     data class Error<out T>(val exception: Exception) : Response<T>() {
-        val type: ERROR_TYPE =
+        /** This is may not be accurate, this can be achieved  with connectivityManager */
+        val type: ErrorTypes =
             if (exception.localizedMessage?.contains("Unable to resolve host", true) == true) {
-                ERROR_TYPE.NO_NETWORK
+                ErrorTypes.NO_NETWORK
             } else {
-                ERROR_TYPE.ERROR
+                ErrorTypes.ERROR
             }
     }
 }

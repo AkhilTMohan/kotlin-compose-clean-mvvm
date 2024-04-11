@@ -57,7 +57,7 @@ fun LoadList(
         is LoadState.Error -> {
             updateBaseUIState?.invoke(
                 baseUIState.copy(
-                    isError = Response.ERROR_TYPE.ERROR
+                    isError = Response.ErrorTypes.ERROR
                 )
             )
             LoadVerticalGrid(

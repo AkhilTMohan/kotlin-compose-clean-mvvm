@@ -6,14 +6,15 @@ import androidx.paging.PagingState
 import androidx.paging.RemoteMediator
 import androidx.room.withTransaction
 import com.interview.planets.core.database.PlanetDatabase
-import com.interview.planets.data.models.Planet
 import com.interview.planets.data.models.PageDetails
+import com.interview.planets.data.models.Planet
 import com.interview.planets.data.network.PlanetAPIInterface
 import kotlinx.coroutines.Dispatchers.IO
 import kotlinx.coroutines.withContext
 import okio.IOException
 import retrofit2.HttpException
 
+@Suppress("UNCHECKED_CAST")
 @OptIn(ExperimentalPagingApi::class)
 class PlanetRemoteMediator(
     private val planetAPIInterface: PlanetAPIInterface,

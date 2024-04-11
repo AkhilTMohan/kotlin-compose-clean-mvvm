@@ -1,6 +1,5 @@
 package com.interview.planets.data
 
-import androidx.paging.RemoteMediator
 import com.interview.planets.core.database.PlanetsDao
 import com.interview.planets.data.models.Planet
 import com.interview.planets.data.network.PlanetAPIInterface

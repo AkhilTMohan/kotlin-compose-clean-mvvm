@@ -1,14 +1,9 @@
 package com.interview.planets.presentation
 
 import android.widget.Toast
-import androidx.compose.animation.AnimatedVisibility
-import androidx.compose.animation.EnterTransition
 import androidx.compose.animation.core.tween
 import androidx.compose.animation.scaleIn
 import androidx.compose.animation.scaleOut
-import androidx.compose.animation.slideIn
-import androidx.compose.animation.slideInVertically
-import androidx.compose.animation.slideOutVertically
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.ui.platform.LocalContext
@@ -80,7 +75,7 @@ fun BaseUI(
 @Composable
 fun CheckError(baseUIState: MainViewModel.BaseUIState) {
     val context = LocalContext.current
-    if (baseUIState.isError == Response.ERROR_TYPE.NO_NETWORK) {
+    if (baseUIState.isError == Response.ErrorTypes.NO_NETWORK) {
         val noInternetMessage =
             stringResource(R.string.you_are_not_connected_to_the_internet_showing_offline_data)
         LaunchedEffect(key1 = baseUIState.isError) {

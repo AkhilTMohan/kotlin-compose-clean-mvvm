@@ -1,7 +1,6 @@
 package com.interview.planets.data.models
 
 
-import androidx.room.Entity
 import com.google.gson.annotations.SerializedName
 
 data class PlanetResponse(

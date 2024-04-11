@@ -65,7 +65,7 @@ class MainViewModel @Inject constructor(
 
     data class BaseUIState(
         var isLoading: Boolean = false,
-        var isError: Response.ERROR_TYPE? = null,
+        var isError: Response.ErrorTypes? = null,
         var planetData: Planet? = null,
         val planets: Flow<PagingData<Planet>>? = null,
         var data: Any? = null

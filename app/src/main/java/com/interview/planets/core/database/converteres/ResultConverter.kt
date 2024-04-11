@@ -1,10 +1,8 @@
 package com.interview.planets.core.database.converteres
 
 import androidx.room.TypeConverter
-import com.google.gson.Gson
 import com.interview.planets.core.helpers.SingletonUtils
 import com.interview.planets.data.models.Planet
-import javax.inject.Inject
 
 class ResultConverter {
 
