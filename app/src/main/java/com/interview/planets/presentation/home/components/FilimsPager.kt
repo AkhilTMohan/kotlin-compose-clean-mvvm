@@ -27,8 +27,6 @@ import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import com.interview.planets.R
 
-// Assume you have a Resident data class with relevant properties (e.g., name, species, etc.)
-
 @Composable
 fun FilmItem(count: Int) {
     Card(

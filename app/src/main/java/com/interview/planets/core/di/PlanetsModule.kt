@@ -68,7 +68,7 @@ object PlanetsModule {
     @Singleton
     @Provides
     fun providePlanetService(okHttpClient: OkHttpClient): PlanetAPIInterface = Retrofit.Builder()
-        .baseUrl("https://swapi.dev/")
+        .baseUrl(BuildConfig.BASE_URL)
         .addConverterFactory(GsonConverterFactory.create())
         .client(okHttpClient)
         .build()

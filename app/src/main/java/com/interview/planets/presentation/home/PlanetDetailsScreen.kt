@@ -26,6 +26,12 @@ import com.interview.planets.presentation.MainViewModel
 import com.interview.planets.presentation.home.components.FilmRow
 import com.interview.planets.presentation.home.components.ResidentsPager
 
+/**
+ *
+ *Planet details screen includes all details of the planet. This screen will fetch details from
+ * server if data available with server, if no data available or network fail it will show the
+ * db data available.
+ * */
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun PlanetDetailsScreen(

@@ -24,6 +24,9 @@ class MainActivity : ComponentActivity() {
                     fetchPlanetDataFromServer = {
                         mainViewModel.fetchPlanetDataFromServer(it)
 
+                    },
+                    fetchAllPlanetsFromServer = {
+                        mainViewModel.getPlanets()
                     }
                 )
             }

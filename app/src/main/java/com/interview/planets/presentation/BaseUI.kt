@@ -19,11 +19,20 @@ import com.interview.planets.data.network.Response
 import com.interview.planets.presentation.home.PlanetDetailsScreen
 import com.interview.planets.presentation.home.PlanetListScreen
 
+/**
+ * Base UI for a compose application. We are followed single viewmodel single activity structure
+ * for this application. Since it is a small app. :).
+ * the updateBaseUIState will update the root compose function and it will cause the entire views
+ * recompose.
+ *
+ * Added common error toast on base ui.
+ * */
 @Composable
 fun BaseUI(
     baseUIState: MainViewModel.BaseUIState,
     updateBaseUIState: (MainViewModel.BaseUIState) -> Unit,
-    fetchPlanetDataFromServer: (Planet?) -> Unit
+    fetchPlanetDataFromServer: (Planet?) -> Unit,
+    fetchAllPlanetsFromServer: () -> Unit
 ) {
 
     CheckError(baseUIState)
@@ -46,7 +55,9 @@ fun BaseUI(
                         )
                     )
                     navController.navigate(PLANET_DETAILS)
-                })
+                },
+                fetchAllPlanetsFromServer = fetchAllPlanetsFromServer
+            )
         }
         composable(PLANET_DETAILS, enterTransition = {
             scaleIn(
@@ -58,15 +69,15 @@ fun BaseUI(
                     animationSpec = tween(durationMillis = 1000)
                 )
             }) {
-                PlanetDetailsScreen(
-                    updateBaseUIState = updateBaseUIState,
-                    baseUIState = baseUIState,
-                    onBackPressed = {
-                        navController.popBackStack()
-                    },
-                    fetchPlanetDataFromServer = fetchPlanetDataFromServer
-                )
-            }
+            PlanetDetailsScreen(
+                updateBaseUIState = updateBaseUIState,
+                baseUIState = baseUIState,
+                onBackPressed = {
+                    navController.popBackStack()
+                },
+                fetchPlanetDataFromServer = fetchPlanetDataFromServer
+            )
+        }
     }
 }
 

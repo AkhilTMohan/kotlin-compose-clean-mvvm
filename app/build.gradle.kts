@@ -41,6 +41,7 @@ android {
 
         debug {
             isDebuggable = true
+            buildConfigField("String","BASE_URL","\"https://swapi.dev/\"")
             proguardFiles(
                 getDefaultProguardFile("proguard-android-optimize.txt"), "proguard-rules.pro"
             )
