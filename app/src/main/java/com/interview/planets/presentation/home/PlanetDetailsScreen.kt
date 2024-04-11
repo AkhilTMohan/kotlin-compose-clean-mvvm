@@ -129,7 +129,7 @@ fun PlanetDetailsScreen(
 
                 item {
                     Text(
-                        text = "Residents:",
+                        text = stringResource(R.string.residents_),
                         fontWeight = FontWeight.Bold,
                         modifier = Modifier.padding(top = 16.dp)
                     )
@@ -139,7 +139,7 @@ fun PlanetDetailsScreen(
                 // Films
                 item {
                     Text(
-                        text = "Featured in Films:",
+                        text = stringResource(R.string.featured_in_films),
                         fontWeight = FontWeight.Bold,
                         modifier = Modifier.padding(top = 16.dp)
                     )

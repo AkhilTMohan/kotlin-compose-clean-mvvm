@@ -79,7 +79,7 @@ fun ResidentsPager(residentUrls: List<String?>?) {
         modifier = Modifier.fillMaxWidth()
     ) {
         residentUrls?.let {
-            itemsIndexed(residentUrls) { index, value ->
+            itemsIndexed(residentUrls) { index, _ ->
                 ResidentItem(index)
             }
         }

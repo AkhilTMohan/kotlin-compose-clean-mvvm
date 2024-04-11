@@ -15,4 +15,6 @@
     <string name="films">Films</string>
     <string name="residents">Residents</string>
     <string name="you_are_not_connected_to_the_internet_showing_offline_data">You are not connected to the internet, showing offline data</string>
+    <string name="featured_in_films">Featured in Films:</string>
+    <string name="residents_">Residents:</string>
 </resources>

@@ -2,7 +2,22 @@
 <project version="4">
   <component name="deploymentTargetDropDown">
     <value>
+      <entry key="ComponentInstrumentedTest">
+        <State />
+      </entry>
+      <entry key="PlanetsInstrumentedTest">
+        <State />
+      </entry>
       <entry key="app">
+        <State />
+      </entry>
+      <entry key="buttonClick_ChangesTextViewText()">
+        <State />
+      </entry>
+      <entry key="checkFullScreenLoadingHaveDefaultText()">
+        <State />
+      </entry>
+      <entry key="checkPlanetDetailsScreenHaveFilmsAndResidents()">
         <State />
       </entry>
     </value>

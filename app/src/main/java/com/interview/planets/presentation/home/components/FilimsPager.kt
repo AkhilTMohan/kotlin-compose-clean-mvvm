@@ -78,7 +78,7 @@ fun FilmRow(filmUrls: List<String?>?) {
         modifier = Modifier.fillMaxWidth()
     ) {
         filmUrls?.let {
-            itemsIndexed(filmUrls){ index, value->
+            itemsIndexed(filmUrls){ index, _ ->
                 FilmItem(index)
             }
         }
