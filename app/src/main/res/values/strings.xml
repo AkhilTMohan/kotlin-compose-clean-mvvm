@@ -1,3 +1,18 @@
 <resources>
     <string name="app_name">Planets</string>
+    <string name="film">Film</string>
+    <string name="resident">Resident</string>
+    <string name="population">Population</string>
+    <string name="surface_water">Surface Water</string>
+    <string name="terrain">Terrain</string>
+    <string name="gravity">Gravity</string>
+    <string name="climate">Climate</string>
+    <string name="diameter">Diameter</string>
+    <string name="orbital_period">Orbital Period</string>
+    <string name="rotation_period">Rotation Period</string>
+    <string name="na">NA</string>
+    <string name="view_more"><![CDATA[VIEW MORE >>]]></string>
+    <string name="films">Films</string>
+    <string name="residents">Residents</string>
+    <string name="you_are_not_connected_to_the_internet_showing_offline_data">You are not connected to the internet, showing offline data</string>
 </resources>

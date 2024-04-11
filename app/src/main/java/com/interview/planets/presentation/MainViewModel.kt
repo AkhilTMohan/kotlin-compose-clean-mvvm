@@ -5,6 +5,7 @@ import androidx.lifecycle.viewModelScope
 import androidx.paging.PagingData
 import androidx.paging.cachedIn
 import com.interview.planets.data.models.Planet
+import com.interview.planets.data.network.Response
 import com.interview.planets.domain.PlanetUseCase
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.Flow
@@ -40,27 +41,31 @@ class MainViewModel @Inject constructor(
 
     fun fetchPlanetDataFromServer(planet: Planet?) {
         viewModelScope.launch {
-            val planetResponse = useCase.fetchPlanetDataFromServer(planet)
-            if (planetResponse != null) {
-                updateBaseUIState(
-                    _uiState.value.copy(
-                        planetData = planetResponse,
+            val planetResponse:Response<Planet> = useCase.fetchPlanetDataFromServer(planet)
+            when (planetResponse) {
+                is Response.Success -> {
+                    updateBaseUIState(
+                        _uiState.value.copy(
+                            planetData = planetResponse.data,
+                        )
                     )
-                )
-            } else {
-                updateBaseUIState(
-                    _uiState.value.copy(
-                        planetData = planet,
-                        isError = "Error",
+                }
+
+                is Response.Error -> {
+                    updateBaseUIState(
+                        _uiState.value.copy(
+                            planetData = planet,
+                            isError = planetResponse.type,
+                        )
                     )
-                )
+                }
             }
         }
     }
 
     data class BaseUIState(
         var isLoading: Boolean = false,
-        var isError: String? = null,
+        var isError: Response.ERROR_TYPE? = null,
         var planetData: Planet? = null,
         val planets: Flow<PagingData<Planet>>? = null,
         var data: Any? = null

@@ -11,18 +11,16 @@ import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Scaffold
-import androidx.compose.material3.Snackbar
-import androidx.compose.material3.SnackbarData
-import androidx.compose.material3.SnackbarDefaults
-import androidx.compose.material3.SnackbarHost
-import androidx.compose.material3.SnackbarVisuals
 import androidx.compose.material3.Text
 import androidx.compose.material3.TopAppBar
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.DisposableEffect
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import com.interview.components.FullScreenLoader
+import com.interview.planets.R
 import com.interview.planets.data.models.Planet
 import com.interview.planets.presentation.MainViewModel
 import com.interview.planets.presentation.home.components.FilmRow
@@ -36,6 +34,19 @@ fun PlanetDetailsScreen(
     fetchPlanetDataFromServer: (Planet?) -> Unit,
     onBackPressed: () -> Unit
 ) {
+
+    DisposableEffect(key1 = Unit) {
+        onDispose {
+            updateBaseUIState(
+                baseUIState.copy(
+                    data = null,
+                    planetData = null,
+                    isError = null
+                )
+            )
+        }
+
+    }
     if (baseUIState.data !is Planet) {
         onBackPressed()
     } else {
@@ -54,7 +65,7 @@ fun PlanetDetailsScreen(
         Scaffold(
             topBar = {
                 TopAppBar(
-                    title = { Text(text = planet?.name ?: "NA") },
+                    title = { Text(text = planet?.name ?: stringResource(R.string.na)) },
                     navigationIcon = {
                         IconButton(onClick = { onBackPressed() }) {
                             Icon(Icons.AutoMirrored.Default.ArrowBack, contentDescription = null)
@@ -111,10 +122,6 @@ fun PlanetDetailsScreen(
                         )
                         Text(
                             text = "Edited: ${planet?.edited}",
-                            style = MaterialTheme.typography.bodyMedium
-                        )
-                        Text(
-                            text = "URL: ${planet?.url}",
                             style = MaterialTheme.typography.bodyMedium
                         )
                     }

@@ -16,8 +16,10 @@ import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
+import com.interview.planets.R
 
 // Assume you have a Resident data class with relevant properties (e.g., name, species, etc.)
 
@@ -37,15 +39,17 @@ fun FilmItem(count: Int) {
         ),
         elevation = CardDefaults.elevatedCardElevation()
     ) {
-        Column(Modifier.padding(4.dp)
-            .fillMaxWidth()
-            .fillMaxHeight(),
+        Column(
+            Modifier
+                .padding(4.dp)
+                .fillMaxWidth()
+                .fillMaxHeight(),
             horizontalAlignment = Alignment.CenterHorizontally,
             verticalArrangement = Arrangement.Center) {
             Text(
                 modifier = Modifier.fillMaxWidth(),
                 textAlign = TextAlign.Center,
-                text = "Film",
+                text = stringResource(R.string.film),
                 style = MaterialTheme.typography.bodySmall
             )
             Text(

@@ -19,18 +19,22 @@ import com.interview.components.FullScreenLoader
 import com.interview.components.ListItemLoader
 import com.interview.components.R
 import com.interview.planets.data.models.Planet
+import com.interview.planets.data.network.Response
 import com.interview.planets.presentation.MainViewModel
 import com.interview.planets.presentation.home.components.PlanetCardItem
 
 @Preview
 @Composable
 fun PlanetListScreen(
-    uiState: MainViewModel.BaseUIState? = null,
-    navigateToDetails: ((Planet) -> Unit)? = null
+    baseUIState: MainViewModel.BaseUIState? = null,
+    navigateToDetails: ((Planet) -> Unit)? = null,
+    updateBaseUIState: ((MainViewModel.BaseUIState) -> Unit)? = null
 ) {
     val scrollState = rememberLazyGridState()
-    uiState?.planets?.collectAsLazyPagingItems()?.let { lazyPagingItems ->
+    baseUIState?.planets?.collectAsLazyPagingItems()?.let { lazyPagingItems ->
         LoadList(
+            baseUIState = baseUIState,
+            updateBaseUIState = updateBaseUIState,
             lazyPagingItems = lazyPagingItems,
             scrollState = scrollState,
             navigateToDetails = navigateToDetails
@@ -42,13 +46,20 @@ fun PlanetListScreen(
 fun LoadList(
     lazyPagingItems: LazyPagingItems<Planet>,
     scrollState: LazyGridState,
-    navigateToDetails: ((Planet) -> Unit)? = null
+    navigateToDetails: ((Planet) -> Unit)? = null,
+    baseUIState: MainViewModel.BaseUIState,
+    updateBaseUIState: ((MainViewModel.BaseUIState) -> Unit)?
 ) {
     val screenWidth = LocalConfiguration.current.screenWidthDp
     val itemWidth = screenWidth.div(3.5)
 
     when (lazyPagingItems.loadState.refresh) {
         is LoadState.Error -> {
+            updateBaseUIState?.invoke(
+                baseUIState.copy(
+                    isError = Response.ERROR_TYPE.ERROR
+                )
+            )
             LoadVerticalGrid(
                 scrollState = scrollState,
                 lazyPagingItems = lazyPagingItems,
